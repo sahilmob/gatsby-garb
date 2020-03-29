@@ -15,7 +15,7 @@ import "./layout.css";
 const Layout = ({ children }) => {
   const {
     site: {
-      siteMetadata: { title, author },
+      siteMetadata: { title, author, createdAt },
     },
   } = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -23,6 +23,7 @@ const Layout = ({ children }) => {
         siteMetadata {
           title
           author
+          createdAt
         }
       }
     }
@@ -40,9 +41,7 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a> {` Built by ${author}`}
+          {` Built by ${author}`}, © {createdAt}
         </footer>
       </div>
     </>
