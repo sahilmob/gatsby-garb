@@ -2,6 +2,7 @@ const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
 
 const PostTemplate = path.resolve("./src/templates/post-template.js");
+const BlogTemplate = path.resolve("./src/templates/blog-template.js");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
@@ -50,4 +51,25 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     }
   );
+
+  edges.forEach((_, i, edgesArray) => {
+    const totalPages = edgesArray.length;
+    const perPage = 1;
+    const currentPage = i + 1;
+    const isFirstPage = i === 0;
+    const isLastPage = currentPage === totalPages;
+
+    createPage({
+      path: isFirstPage ? "/blog/" : `/blog/${currentPage}`,
+      component: BlogTemplate,
+      context: {
+        limit: perPage,
+        skip: i * perPage,
+        isFirstPage,
+        isLastPage,
+        currentPage,
+        totalPages,
+      },
+    });
+  });
 };
