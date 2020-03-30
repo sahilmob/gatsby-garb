@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 
-import Layout from "../../components/layout";
+import Layout from "../components/layout";
 
 export default () => {
   const {
