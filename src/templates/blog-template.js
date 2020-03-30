@@ -38,12 +38,25 @@ export default function Blog({
           )
         )}
 
-        <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            maxWidth: 300,
+            margin: "0 auto",
+          }}
+        >
           {!isFirstPage && (
             <Link to={prevPage} rel="prev">
               Prev Page
             </Link>
           )}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Link key={index} to={`/blog/${index === 0 ? "" : index + 1}`}>
+              {index + 1}
+            </Link>
+          ))}
           {!isLastPage && (
             <Link to={nextPage} rel="next">
               Next Page

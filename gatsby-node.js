@@ -52,9 +52,9 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   );
 
-  edges.forEach((_, i, edgesArray) => {
-    const totalPages = edgesArray.length;
-    const perPage = 1;
+  const perPage = 2;
+  const totalPages = Math.ceil(edges.length / perPage);
+  Array.from({ length: totalPages }).forEach((_, i) => {
     const currentPage = i + 1;
     const isFirstPage = i === 0;
     const isLastPage = currentPage === totalPages;
